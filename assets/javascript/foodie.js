@@ -1,32 +1,49 @@
-var teams = ["Kansas City Chiefs", "Kansas City Royals", "Sporting Kansas City", "Saint Louis Blues"];
+var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 
+// Show the initial buttons based on given array 
+function renderInitialButtons(){
+    // So that the buttons are not added on repeat 
+    $('.buttonsDiv').empty();
 
+    for (var i = 0; i < categoriesArray.length; i++){
+        // Create a new button 
+        var newFoodButton = $('<button>');
+        // Add classes and data type 
+        newFoodButton.addClass('foodCategory');
+        newFoodButton.addClass('btn btn-info ml-5');
+        newFoodButton.attr('data-type', categoriesArray[i]);
+        // Initial button text
+        newFoodButton.text(categoriesArray[i]);
+        $('.buttonsDiv').append(newFoodButton)
 
-$("#buttons-dump").on("click", 'button',function () {
-    var team = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + team + "&api_key=L5ZEm4mMU3RGJNDRegpThdXLHyvzj1O0";
-    
+    }
+}
+
+// Add new buttons dynamically 
+$('#addFood').on('click', function(event){
+    event.preventDefault();
+    // Grab input 
+    var newFood = $('#foodInput').val().trim();
+    categoriesArray.push(newFood);
+// Clear after submit 
+    $('#foodInput').val('');
+
+    renderInitialButtons();
+})
+
+renderInitialButtons();
+
+$(document).on('click', '.foodCategory', function(){
+    var restaurantsNearMe = $(this).attr('data-type');
+
+    var queryURL = ''
+
     $.ajax({
         url: queryURL,
-        method: "GET"
+        method: 'GET'
+    }).then(function(response){
+        var results = response.data;
+        // Loop and append 
     })
-    
-        .then(function(response) {
-            var results = response.data;
-            console.log(results);
-
-            for (var i = 0; i < results.length; i++) {
-                if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                    var gifDiv = $("<div>");
-                    var rating = results[i].rating;
-                    var p = $("<p>").text("Rating: " + rating);
-                    var teamImage = $("<img>");
-                    teamImage.attr("src", results[i].images.fixed_height.url);
-                    gifDiv.append(p);
-                    gifDiv.append(teamImage);
-
-                    $("#team-gifs-appear-here").prepend(gifDiv);
-                }
-            }
-        });
-});
+    $('.foodView').empty();
+})
