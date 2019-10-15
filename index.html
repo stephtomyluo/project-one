@@ -31,18 +31,21 @@
     
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Hungry?">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search/Add</button>
+            <input id='foodInput' class="form-control mr-sm-2" type="search" placeholder="Hungry?">
+            <button id='addFood' class="btn btn-outline-success my-2 my-sm-0" type="submit">Search/Add</button>
           </form>
         </div>
       </nav>
 
-<!-- Filler button, need to dynamically add  -->
-<button type="button" class="btn btn-info">Info</button>
+<!-- Where food category buttons will appear  -->
+<div class="buttonsDiv"></div>
 
+<!-- Where nearby suggestions will appear  -->
+<div class="foodView">
+  </div>
 
 </div>
 
-
+<script src="./assets/javascript/foodie.js"></script>
 </body>
 </html>
