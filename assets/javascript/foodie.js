@@ -36,12 +36,24 @@ renderInitialButtons();
 $(document).on('click', '.foodCategory', function(){
     var restaurantsNearMe = $(this).attr('data-type');
 
-    var queryURL = ''
+    var queryURL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search'
+    var token = '76_zaLZTUfC3E_A5ihyFB3Cjt7cq7tPxu2DdiwobHqKnTwmhQ_m4zIbjSlRfTdFJQNn0MMqJe0Az5TvohOjf95VC0wOgA_PcX2TFLMtFd7l_a-GMkwu5h6jfs2umXXYx'
 
     $.ajax({
         url: queryURL,
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*',
+        } ,
+        data: {
+            term: restaurantsNearMe,
+            location: 'kansas city',
+            categories: 'food, ALL'
+        }
     }).then(function(response){
+
+        console.log(response)
         var results = response.data;
         // Loop and append 
     })
