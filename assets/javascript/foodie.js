@@ -70,5 +70,5 @@ $(document).on('click', '.foodCategory', function(){
         }
         // Loop and append 
     })
-    // $('.foodView').empty();
+    $('.foodView').empty();
 })
