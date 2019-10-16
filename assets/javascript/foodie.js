@@ -53,9 +53,22 @@ $(document).on('click', '.foodCategory', function(){
         }
     }).then(function(response){
 
-        console.log(response)
-        var results = response.data;
+        console.log(response.businesses)
+        var results = response.businesses;
+        for (var i = 0; i < results.length; i++){
+        var restaurantDiv = $('<div>');
+        var actualRating = results[i].rating;
+        var ratingText = $('<p>').text(`Rating: ${actualRating}`);
+        var htmlExample = `<div class='testclass'>
+                                <p>${actualRating}</p>
+                                <img src='${results[i].image_url}'/>
+                            </div>`
+        
+        restaurantDiv.append(ratingText);
+        $('.foodView').append(htmlExample)
+        // $('.foodView').append(restaurantDiv)
+        }
         // Loop and append 
     })
-    $('.foodView').empty();
+    // $('.foodView').empty();
 })
