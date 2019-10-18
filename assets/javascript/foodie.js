@@ -36,6 +36,7 @@ function renderInitialButtons(){
 
 // Add new buttons dynamically 
 $('#addFood').on('click', function(event){
+    validate();
     event.preventDefault();
     // Grab input 
     var newFood = $('#foodInput').val().trim();
@@ -47,6 +48,16 @@ $('#addFood').on('click', function(event){
 })
 
 renderInitialButtons();
+
+function validate() {
+      
+    if($("input").val("") ) {
+       alert( "Please provide a restaurant!" );
+       document.myForm.Name.focus() ;
+       return false;
+    }
+    return( true );
+}
 
 $(document).on('click', '.foodCategory', function(){
     var restaurantsNearMe = $(this).attr('data-type');
