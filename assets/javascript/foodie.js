@@ -72,16 +72,25 @@ $(document).on('click', '.foodCategory', function(){
         var results = response.businesses;
         for (var i = 0; i < results.length; i++){
         var restaurantDiv = $('<div>');
-        var actualRating = results[i].rating;
+        var restaurantName = results[i].name;
+        var phoneNumber = ('Phone Number: ' + results[i].display_phone);
         var ratingText = $('<p>').text(`Rating: ${actualRating}`);
+        var actualRating = ('Rating: ' + results[i].rating);
+        var totalReviews = results[i].review_count;
+        var actualPrice = results[i].price;
+        var website = ('website: ' +results[i].url);
         var htmlExample = `<div class='testclass'>
-                                <p>${actualRating}</p>
+                                <p>${restaurantName}</p>
+                                <p>${phoneNumber}</p>
+                                <p>${actualRating} Reviews:  ${totalReviews}</p>
+                                <p>${actualPrice}</p>
+                                <p>${website}</p>
                                 <img src='${results[i].image_url}'/>
                             </div>`
         
         restaurantDiv.append(ratingText);
         $('.foodView').append(htmlExample)
-        // $('.foodView').append(restaurantDiv)
+        
         }
         // Loop and append 
     })
