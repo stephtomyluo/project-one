@@ -1,7 +1,9 @@
-$( document ).ready(function() {
-    console.log( "Loaded!" );
-// Modal that helps instruct user 
+$(document).ready(function () {
+    console.log("Loaded!");
+  // Modal that helps instruct user 
     $('#myModal').modal('show')
+
+    $("#foodHelp").hide();
 
 // IP-API 
     var queryURL = 'http://ip-api.com/json/?city'
@@ -9,25 +11,25 @@ $( document ).ready(function() {
     $.ajax({
         url: queryURL,
         method: "GET",
-    }).then(function(response){
+    }).then(function (response) {
 // Dynamically change yelp location 
         currentLocation = response.city
     });
 
 
 })
-    
+
 
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 // If no location is found, kc is automatic 
 var currentLocation = 'kansas city'
 
 // Show the initial buttons based on given array 
-function renderInitialButtons(){
+function renderInitialButtons() {
     // So that the buttons are not added on repeat 
     $('.buttonsDiv').empty();
 
-    for (var i = 0; i < categoriesArray.length; i++){
+    for (var i = 0; i < categoriesArray.length; i++) {
         // Create a new button 
         var newFoodButton = $('<button>');
         // Add classes and data type 
@@ -42,31 +44,28 @@ function renderInitialButtons(){
 }
 
 // Add new buttons dynamically 
-$('#addFood').on('click', function(event){
-    validate();
+$('#addFood').on('click', function (event) {
     event.preventDefault();
-    // Grab input 
-    var newFood = $('#foodInput').val().trim();
-    categoriesArray.push(newFood);
-// Clear after submit 
-    $('#foodInput').val('');
+    if ($("input").val() === "") {
+        $("#foodHelp").show();
+        // validate();
+    } else {
+        // Grab input 
+        var newFood = $('#foodInput').val().trim();
+        categoriesArray.push(newFood);
+        // Clear after submit 
+        $('#foodInput').val('');
+        $("#foodHelp").hide();
+        renderInitialButtons();
 
-    renderInitialButtons();
+    }
 })
 
 renderInitialButtons();
 
-function validate() {
-      
-    if($("input").val("") ) {
-       alert( "Please provide a restaurant!" );
-       document.myForm.Name.focus() ;
-       return false;
-    }
-    return( true );
-}
 
-$(document).on('click', '.foodCategory', function(){
+
+$(document).on('click', '.foodCategory', function () {
     var restaurantsNearMe = $(this).attr('data-type');
 
     var queryURL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search'
@@ -78,16 +77,17 @@ $(document).on('click', '.foodCategory', function(){
         headers: {
             Authorization: `Bearer ${token}`,
             'Access-Control-Allow-Origin': '*',
-        } ,
+        },
         data: {
             term: restaurantsNearMe,
             location: currentLocation,
             categories: 'food, ALL'
         }
-    }).then(function(response){
+    }).then(function (response) {
 
         console.log(response.businesses)
         var results = response.businesses;
+   
         for (var i = 0; i < results.length; i++){
         var restaurantDiv = $('<div>');
         var restaurantName = results[i].name;
@@ -106,6 +106,9 @@ $(document).on('click', '.foodCategory', function(){
                                 <p>${actualPrice}</p>
                                 <img src='${image}' class='img-thumbnail'/>
                             </div>`
+
+         
+
                 // <p>${website}</p>
         restaurantDiv.append(ratingText);
         $('.foodView').append(yelpResults)
