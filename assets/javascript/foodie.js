@@ -1,4 +1,19 @@
+$( document ).ready(function() {
+    console.log( "Loaded!" );
+
+    var queryURL = 'http://ip-api.com/json/?city'
+
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+    }).then(function(response){
+        currentLocation = response.city
+    });
+})
+    
+
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
+var currentLocation = 'kansas city'
 
 // Show the initial buttons based on given array 
 function renderInitialButtons(){
@@ -48,7 +63,7 @@ $(document).on('click', '.foodCategory', function(){
         } ,
         data: {
             term: restaurantsNearMe,
-            location: 'kansas city',
+            location: currentLocation,
             categories: 'food, ALL'
         }
     }).then(function(response){
