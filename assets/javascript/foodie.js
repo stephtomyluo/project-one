@@ -1,18 +1,25 @@
 $( document ).ready(function() {
     console.log( "Loaded!" );
+// Modal that helps instruct user 
+    $('#myModal').modal('show')
 
+// IP-API 
     var queryURL = 'http://ip-api.com/json/?city'
 
     $.ajax({
         url: queryURL,
         method: "GET",
     }).then(function(response){
+// Dynamically change yelp location 
         currentLocation = response.city
     });
+
+
 })
     
 
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
+// If no location is found, kc is automatic 
 var currentLocation = 'kansas city'
 
 // Show the initial buttons based on given array 
@@ -78,18 +85,19 @@ $(document).on('click', '.foodCategory', function(){
         var actualRating = ('Rating: ' + results[i].rating);
         var totalReviews = results[i].review_count;
         var actualPrice = results[i].price;
-        var website = ('website: ' +results[i].url);
-        var htmlExample = `<div class='testclass'>
+        // var website = ('website: ' +results[i].url);
+
+        var image = results[i].image_url
+        var yelpResults = `<div class='col-md-4'>
                                 <p>${restaurantName}</p>
                                 <p>${phoneNumber}</p>
                                 <p>${actualRating} Reviews:  ${totalReviews}</p>
                                 <p>${actualPrice}</p>
-                                <p>${website}</p>
-                                <img src='${results[i].image_url}'/>
+                                <img src='${image}' class='img-thumbnail'/>
                             </div>`
-        
+                // <p>${website}</p>
         restaurantDiv.append(ratingText);
-        $('.foodView').append(htmlExample)
+        $('.foodView').append(yelpResults)
         
         }
         // Loop and append 
