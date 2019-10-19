@@ -2,6 +2,7 @@ $(document).ready(function() {
   $("#foodHelp").hide();
 
   M.AutoInit();
+  $('#modal1').modal('open');
   initMap();
 
   // IP-API
