@@ -1,24 +1,17 @@
 $(document).ready(function() {
-  console.log("Loaded!");
+  $("#foodHelp").hide();
+
   M.AutoInit();
 
-  $("#foodHelp").hide();
-  $('.sidenav').sidenav();
-  $('.fixed-action-btn').floatingActionButton();
-
-  // Modal that helps instruct user
-//   $("#myModal").modal("show");
-
-
   // IP-API
-  var queryURL = "http://ip-api.com/json/?city";
+  var queryURL = "http://ip-api.com/json/?zip";
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
     // Dynamically change yelp location
-    currentLocation = response.city;
+    currentLocation = response.zip;
   });
 });
 
@@ -35,7 +28,7 @@ function renderInitialButtons() {
     // Create a new button
     var newFoodButton = $("<button>");
     // Add classes and data type
-    newFoodButton.addClass("foodCategory btn");
+    newFoodButton.addClass("foodCategory btn col s6 m4 l3");
     newFoodButton.attr("data-type", categoriesArray[i]);
     // Initial button text
     newFoodButton.text(categoriesArray[i]);
@@ -97,21 +90,19 @@ $(document).on("click", ".foodCategory", function() {
       var totalReviews = results[i].review_count;
       var actualPrice = results[i].price;
       // var website = ('website: ' +results[i].url);
-
       var image = results[i].image_url;
-      var yelpResults = `<div class='col s12 m6 l4'>
+      var yelpResults = `<div class='col s12 m6 l4 card small'>
                                 <p>${restaurantName}</p>
                                 <p>${phoneNumber}</p>
                                 <p>${actualRating} Reviews:  ${totalReviews}</p>
                                 <p>${actualPrice}</p>
-                                <img src='${image}' class='img-thumbnail'/>
+                                <img src='${image}' class='responsive-img'/>
                             </div>`;
 
       // <p>${website}</p>
       restaurantDiv.append(ratingText);
       $(".foodView").append(yelpResults);
     }
-    // Loop and append
   });
   $(".foodView").empty();
 });

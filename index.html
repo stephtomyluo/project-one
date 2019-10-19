@@ -14,25 +14,24 @@
         font-size: 3em;
       }
     </style>
-  
+
     <!-- Materialize CDN  -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-  
+
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- JQuery CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   
   </head>
+
   <body>
     <!-- Materialize navbar  -->
     <nav>
@@ -48,13 +47,13 @@
         </ul>
       </div>
     </nav>
-
+    <!-- Mobile nav  -->
     <ul class="sidenav" id="mobile-demo">
       <li><a href="#">Sign In</a></li>
       <li><a href="#">My Account</a></li>
       <li><a href="#">Favorites</a></li>
     </ul>
-
+    <!-- Input form  -->
     <form>
       <div class="input-field">
         <input id="foodInput" type="search" required />
@@ -64,7 +63,8 @@
         <i class="material-icons">close</i>
       </div>
     </form>
-
+    <!-- Submit button  -->
+    <div class="row">
     <button
       id="addFood"
       class="btn waves-effect waves-light"
@@ -74,50 +74,77 @@
       Submit
       <i class="material-icons right">send</i>
     </button>
-    <br>
-    <small id='foodHelp'>Please input food category!</small>
-
+    <br />
+    <!-- Button validation text  -->
+    <small id="foodHelp">Please input food category!</small>
+  </div>
+   
 
     <div class="container">
-      
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn floating pulse modal-trigger" href="#modal1">Need Help?</a>
+      <!-- Modal Trigger -->
+      <div class="row">
+        <a
+          class=" waves-effect waves-light btn floating  modal-trigger col l12"
+          href="#modal1"
+          >Need Help?</a
+        >
+      </div>
 
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Welcome to My Craving</h4>
-      <p>Please enter a food category and hopefully we can help you fulfill your unknown craving! </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
-          
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Welcome to My Craving</h4>
+          <p>
+            Please enter a food category and hopefully we can help you fulfill
+            your unknown craving!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+            >Will Do!</a
+          >
+        </div>
+      </div>
+
       <!-- Where food category buttons will appear  -->
-      <div class="buttonsDiv"></div>
-
+      <div class="row">
+        <div class="buttonsDiv"></div>
+      </div>
       <!-- Where nearby suggestions will appear  -->
       <div class="row">
         <div class="foodView"></div>
       </div>
-
-      
-<div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-    </ul>
-  </div>
-        
+      <!-- Fixed action button  -->
+      <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+          <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+          <li>
+            <a class="btn-floating red"
+              ><i class="material-icons">insert_chart</i></a
+            >
+          </li>
+          <li>
+            <a class="btn-floating yellow darken-1"
+              ><i class="material-icons">format_quote</i></a
+            >
+          </li>
+          <li>
+            <a class="btn-floating green"
+              ><i class="material-icons">publish</i></a
+            >
+          </li>
+          <li>
+            <a class="btn-floating blue"
+              ><i class="material-icons">attach_file</i></a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    
-    <script src="./assets/javascript/foodie.js" ></script>
+    <script src="./assets/javascript/foodie.js"></script>
   </body>
 </html>
