@@ -13,7 +13,7 @@ $(document).ready(function() {
     method: "GET"
   }).then(function(response) {
     // Dynamically change yelp location
-    // currentLocation = response.zip;
+     currentLocation = response.zip;
   });
 });
 
