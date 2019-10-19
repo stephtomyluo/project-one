@@ -30,7 +30,7 @@
 
 <body>
   <!-- Materialize navbar  -->
-  <nav>
+  <nav class="nav-extended">
     <div class="nav-wrapper">
       <a class="navbar-brand" href="#">My Craving</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -40,6 +40,15 @@
         <li><a href="#">Favorites</a></li>
       </ul>
     </div>
+
+    <div class="nav-content">
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a href="#test1">Find Restaurants near me</a></li>
+        <li class="tab"><a class="active" href="#test2">Google Maps</a></li>
+        <li class="tab"><a href="#test4">Favorites</a></li>
+      </ul>
+    </div>
+
   </nav>
   <!-- Mobile nav  -->
   <ul class="sidenav" id="mobile-demo">
@@ -68,10 +77,6 @@
 
 
   <div class="container">
-    <!-- Modal Trigger -->
-    <div class="row">
-      <a class=" waves-effect waves-light btn floating  modal-trigger col l12" href="#modal1">Need Help?</a>
-    </div>
 
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
@@ -87,16 +92,26 @@
       </div>
     </div>
 
+    <!-- Testing area  -->
+
+  <div id="test1" class="col s12">
     <!-- Where food category buttons will appear  -->
     <div class="row">
       <div class="buttonsDiv"></div>
     </div>
     <!-- Where nearby suggestions will appear  -->
     <div class="row">
-      <div class="foodView col l9"></div>
-      <div id="google-map" class="col l3"></div>
+      <div class="foodView col l12"></div>
 
     </div>
+  </div>
+  <div id="test2" class="col s12">
+      <div id="google-map" class="col l12"></div>
+
+  </div>
+  <div id="test4" class="col s12">Test 4</div>
+        
+    
     <!-- Fixed action button  -->
     <div class="fixed-action-btn">
       <a class="btn-floating btn-large red">
