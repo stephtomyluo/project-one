@@ -13,7 +13,7 @@ $(document).ready(function() {
     method: "GET"
   }).then(function(response) {
     // Dynamically change yelp location
-    currentLocation = response.zip;
+     currentLocation = response.zip;
   });
 });
 
@@ -116,26 +116,26 @@ var infowindow;
 
 
 function initMap() {
-    var currentLocation = new google.maps.LatLng(-33.867, 151.195);
+    var mapLocation = new google.maps.LatLng(39.0997, -94.5786);
   
     infowindow = new google.maps.InfoWindow();
   
     map = new google.maps.Map(
-        document.getElementById('google-map'), {center: currentLocation, zoom: 15});
+        document.getElementById('google-map'), {center: mapLocation, zoom: 15});
   
     var request = {
-      query: 'Museum of Contemporary Art Australia',
+      query: response.coordinates,
       fields: ['name', 'geometry'],
     };
-  
+
     service = new google.maps.places.PlacesService(map);
-  
-    service.findPlaceFromQuery(request, function(results, status) {
+
+    service.findPlaceFromQuery(request, function (results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
           createMarker(results[i]);
         }
-  
+
         map.setCenter(results[0].geometry.location);
       }
     });
