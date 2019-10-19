@@ -11,3 +11,8 @@
     margin: 0;
     padding: 0;
   }
+
+  .yelpImage {
+    height: 195px;
+    width: 335px;
+  }

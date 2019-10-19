@@ -94,7 +94,7 @@ $(document).on("click", ".foodCategory", function() {
       var actualPrice = results[i].price;
       // var website = ('website: ' +results[i].url);
       var image = results[i].image_url;
-      var yelpResults = `<div data-name="${i}" class='restaurantCard col s12 m6 l4 card small'>
+      var yelpResults = `<div data-name="${i}" class='restaurantCard col s12 m6 l4 card medium'>
 
                             <p>${restaurantName}</p>
                             <p>${phoneNumber}</p>
