@@ -65,7 +65,7 @@ $(document).on("click", ".foodCategory", function() {
   var queryURL =
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search";
   var token =
-    "76_zaLZTUfC3E_A5ihyFB3Cjt7cq7tPxu2DdiwobHqKnTwmhQ_m4zIbjSlRfTdFJQNn0MMqJe0Az5TvohOjf95VC0wOgA_PcX2TFLMtFd7l_a-GMkwu5h6jfs2umXXYx";
+    "TYZngowcxwPSs9gKgh4QvoFtqRjOaf2ljMByH3KisnE-k-zcMifnXcbASV_SJZBeK6vw7aon47lCat8kreKb64XoDv6wxsN0Zz-VvL6olAN9L1dzpvfRP8GUpWWmXXYx";
 
   $.ajax({
     url: queryURL,
@@ -86,6 +86,7 @@ $(document).on("click", ".foodCategory", function() {
     for (var i = 0; i < results.length; i++) {
       var restaurantDiv = $("<div>");
       var restaurantName = results[i].name;
+      console.log(restaurantName)
       var phoneNumber = "Phone Number: " + results[i].display_phone;
       var ratingText = $("<p>").text(`Rating: ${actualRating}`);
       var actualRating = "Rating: " + results[i].rating;
@@ -93,21 +94,37 @@ $(document).on("click", ".foodCategory", function() {
       var actualPrice = results[i].price;
       // var website = ('website: ' +results[i].url);
       var image = results[i].image_url;
-      var yelpResults = `<div class='col s12 m6 l4 card small'>
+      var yelpResults = `<div data-name="${i}" class='restaurantCard col s12 m6 l4 card small'>
                                 <p>${restaurantName}</p>
                                 <p>${phoneNumber}</p>
                                 <p>${actualRating} Reviews:  ${totalReviews}</p>
                                 <p>${actualPrice}</p>
                                 <img src='${image}' class='responsive-img'/>
+                    
                             </div>`;
-
+      // yelpResults.data('coords', {lat: results[i].coordinates.latitude, lng: 1})
       // <p>${website}</p>
       restaurantDiv.append(ratingText);
       $(".foodView").append(yelpResults);
+      var informationObject = {
+        restaurantName: results[i].name,
+        longitude: results[i].coordinates.longitude,
+        latitude: results[i].coordinates.latitude
+      }
+      restaurantsArray.push(informationObject);
+      console.log(restaurantsArray, '.forloop')
     }
   });
   $(".foodView").empty();
 });
+
+var restaurantsArray = []
+var favoritesArray = []
+
+$(document).on('click', '.restaurantCard', function(event){
+  var index = $(this).attr('data-name');
+  console.log(restaurantsArray[index])
+})
 
 // MAP
 var map;
@@ -124,7 +141,7 @@ function initMap() {
         document.getElementById('google-map'), {center: mapLocation, zoom: 15});
   
     var request = {
-      query: response.coordinates,
+      query: currentLocation,
       fields: ['name', 'geometry'],
     };
 
