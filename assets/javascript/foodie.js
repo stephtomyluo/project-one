@@ -2,7 +2,7 @@ $(document).ready(function() {
   $("#foodHelp").hide();
 
   M.AutoInit();
-  $('#modal1').modal('open');
+  initMap();
 
   // IP-API
   var queryURL = "http://ip-api.com/json/?zip";
@@ -115,12 +115,12 @@ var infowindow;
 
 
 function initMap() {
-    var sydney = new google.maps.LatLng(-33.867, 151.195);
+    var currentLocation = new google.maps.LatLng(-33.867, 151.195);
   
     infowindow = new google.maps.InfoWindow();
   
     map = new google.maps.Map(
-        document.getElementById('google-map'), {center: sydney, zoom: 15});
+        document.getElementById('google-map'), {center: currentLocation, zoom: 15});
   
     var request = {
       query: 'Museum of Contemporary Art Australia',
