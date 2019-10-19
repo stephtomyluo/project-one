@@ -1,9 +1,12 @@
 $(document).ready(function() {
   console.log("Loaded!");
+  M.AutoInit();
+
   $("#foodHelp").hide();
+  $('.sidenav').sidenav();
 
   // Modal that helps instruct user
-  $("#myModal").modal("show");
+//   $("#myModal").modal("show");
 
 
   // IP-API
