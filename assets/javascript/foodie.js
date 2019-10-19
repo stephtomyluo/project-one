@@ -4,6 +4,7 @@ $(document).ready(function() {
 
   $("#foodHelp").hide();
   $('.sidenav').sidenav();
+  $('.fixed-action-btn').floatingActionButton();
 
   // Modal that helps instruct user
 //   $("#myModal").modal("show");
@@ -34,8 +35,7 @@ function renderInitialButtons() {
     // Create a new button
     var newFoodButton = $("<button>");
     // Add classes and data type
-    newFoodButton.addClass("foodCategory");
-    newFoodButton.addClass("btn btn-info ml-5");
+    newFoodButton.addClass("foodCategory btn");
     newFoodButton.attr("data-type", categoriesArray[i]);
     // Initial button text
     newFoodButton.text(categoriesArray[i]);
@@ -99,7 +99,7 @@ $(document).on("click", ".foodCategory", function() {
       // var website = ('website: ' +results[i].url);
 
       var image = results[i].image_url;
-      var yelpResults = `<div class='col-md-4'>
+      var yelpResults = `<div class='col s12 m6 l4'>
                                 <p>${restaurantName}</p>
                                 <p>${phoneNumber}</p>
                                 <p>${actualRating} Reviews:  ${totalReviews}</p>
