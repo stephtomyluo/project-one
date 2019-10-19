@@ -95,13 +95,14 @@ $(document).on("click", ".foodCategory", function() {
       // var website = ('website: ' +results[i].url);
       var image = results[i].image_url;
       var yelpResults = `<div data-name="${i}" class='restaurantCard col s12 m6 l4 card small'>
-                                <p>${restaurantName}</p>
-                                <p>${phoneNumber}</p>
-                                <p>${actualRating} Reviews:  ${totalReviews}</p>
-                                <p>${actualPrice}</p>
-                                <img src='${image}' class='responsive-img'/>
-                    
-                            </div>`;
+
+                            <p>${restaurantName}</p>
+                            <p>${phoneNumber}</p>
+                            <p>Reviews:  ${totalReviews}</p>
+                            <p>${actualRating}</p>
+                            <p>${actualPrice}</p>
+                            <img src='${image}' class='yelpImage'/>
+                        </div>`;
       // yelpResults.data('coords', {lat: results[i].coordinates.latitude, lng: 1})
       // <p>${website}</p>
       restaurantDiv.append(ratingText);
