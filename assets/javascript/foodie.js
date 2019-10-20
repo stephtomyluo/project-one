@@ -1,3 +1,5 @@
+var user = ''
+
 // Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyBkN7hBxeg51ajiY_tcjIEUt7iikbP3GJw",
@@ -7,9 +9,10 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
 // make authorization and firebase references
 var auth = firebase.auth();
-var database = firebase.firestore();
+// var database = firebase.firestore();
 
 $(document).ready(function() {
   $("#foodHelp").hide();
@@ -51,23 +54,42 @@ var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 // If no location is found, kc is automatic
 var currentLocation = "kansas city";
 
-// const setUp = (data) => {
-//   if (user) {
-//     loggedIn.forEach(link => link.style.display ='block')
-//     loggedOut.forEach(link => link.style.display ='none')
-//   }else {
-//     loggedIn.forEach(link => link.style.display ='none')
-//     loggedOut.forEach(link => link.style.display ='block')
-//   }
-// }
+
+function hideBasedOnStatus(){
+  console.log('attempt change status')
+  var account = $('#account').attr('data-login');
+  var logoutAcct = $('#logoutAcct').attr('data-login');
+  var logIn = $('#logIn').attr('data-login');
+  var signUp = $('#signUp').attr('data-login');
+// console.log(account, logoutAcct, logIn, signUp)
+
+
+if (account == false){
+  $('#account').removeClass('hidden')
+  $('#logoutAcct').removeClass('hidden')
+  $('#logIn').addClass('hidden')
+  $('#signUp').addClass('hidden')
+
+  $('#account').attr('data-login', true)
+console.log($('#account').attr('data-login'))
+} else if (account == true) {
+  $('#account').addClass('hidden')
+  $('#logoutAcct').addClass('hidden')
+  $('#logIn').removeClass('hidden')
+  $('#signUp').removeClass('hidden')
+
+  $('#account').attr('data-login', false)
+  console.log($('#account').attr('data-login'))
+}
+}
 
 // listen for auth state change 
 auth.onAuthStateChanged(user => {
   if (user){
-    console.log('user logged in as: ' + user)
-    // setUp(user)
+    console.log('user logged in as: ' + user.email)
+    hideBasedOnStatus()
   } else {
-    // setUp(user)
+    hideBasedOnStatus()
     console.log('user logged out')
   }
 
@@ -75,15 +97,6 @@ auth.onAuthStateChanged(user => {
   var loggedOut = $('.logged-out');
   var loggedIn = $('.logged-in');
 
-
-
-  // if (user) {
-  //   $('#favoritesDiv')
-  //   // show 
-  // } else {
-  //   $('#favoritesDiv')
-  //   // hide 
-  // }
 })
 
 var signupForm = $("#signup-form");
@@ -104,6 +117,8 @@ $("#signUpClick").on("click", function(event) {
     var modal = $("#modal-signup");
     M.Modal.getInstance(modal).close();
     signupForm.trigger('reset');
+    user = email
+    console.log(user)
   });
 });
 
@@ -112,6 +127,8 @@ var logout = $("#logout");
 $("#logout").on("click", function(event) {
   event.preventDefault();
   auth.signOut()
+  user = ''
+  console.log(user)
 });
 
 // log back in
@@ -124,12 +141,13 @@ $("#login-form").on("click", function(event) {
   var password = $("#login-password")
     .val()
     .trim();
-
   auth.signInWithEmailAndPassword(email, password).then(cred => {
     // close login and reset 
     var modal = $("#modal-login");
     M.Modal.getInstance(modal).close();
     loginForm.trigger('reset');
+    user = email
+    console.log(user)
   });
 
 });
