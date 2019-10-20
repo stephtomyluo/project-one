@@ -45,7 +45,6 @@
         >
         <!-- Login auth html  -->
         <ul class="right hide-on-med-and-down">
-
           <!-- Account  -->
           <li id="account" class="logged-in">
             <a href="#" class="modal-trigger" data-target="modal-account"
@@ -87,7 +86,7 @@
           <!-- Map tab  -->
           <li class="tab"><a href="#googleMapDiv">Google Maps</a></li>
           <!-- Favorites tab  -->
-          <li class="tab" id='favTab'><a href="#favoritesDiv">Favorites</a></li>
+          <li class="tab" id="favTab"><a href="#favoritesDiv">Favorites</a></li>
         </ul>
       </div>
     </nav>
@@ -96,22 +95,24 @@
     <!-- Mobile nav  -->
     <ul class="sidenav" id="mobile-demo">
       <!-- Account  -->
-      <li id="account" class="logged-in">
+      <li class="logged-in">
         <a href="#" class="modal-trigger" data-target="modal-account"
           >Account</a
         >
       </li>
 
       <!-- Log out  -->
-      <li id="logoutAcct" class="logged-in"><a href="#" id="logout">Logout</a></li>
+      <li class="logged-in">
+        <a href="#" id="logout">Logout</a>
+      </li>
 
       <!-- Login  -->
-      <li id="logIn" class="logged-out">
+      <li class="logged-out">
         <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
       </li>
 
       <!-- Sign up  -->
-      <li id="signUp" class="logged-out">
+      <li class="logged-out">
         <a href="#" class="modal-trigger" data-target="modal-signup">Sign up</a>
       </li>
     </ul>
@@ -241,7 +242,6 @@
 
     <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
 
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9GXx6IBu2vBRI2hSzuYwf__a8lnvErHM&libraries=places&callback=initMap"

@@ -22,7 +22,6 @@ firebase.initializeApp(firebaseConfig);
 
 // Make authorization and firebase references
 var auth = firebase.auth();
-// var database = firebase.firestore();
 
 $(document).ready(function() {
   M.AutoInit();
@@ -64,26 +63,24 @@ $(document).ready(function() {
 auth.onAuthStateChanged(user => {
   if (user) {
     console.log("User logged in as: " + user.email);
-    $("#logIn").hide();
-    $("#signUp").hide();
-    $("#account").show();
-    $("#logoutAcct").show();
+
     $("#favTab").show();
+
+    $(".logged-out").hide();
+    $(".logged-in").show();
 
     var accountDetails = $(".accountDetails");
     accountDetails = `<div>
     <p>You are signed in as ${user.email}</p>
 </div>`;
-$("#modal-account").append(accountDetails);
-
+    $("#modal-account").append(accountDetails);
 
     // Conditionally show links
   } else if (!user) {
-    $("#account").hide();
-    $("#logoutAcct").hide();
-    $("#logIn").show();
-    $("#signUp").show();
     $("#favTab").hide();
+
+    $(".logged-out").show();
+    $(".logged-in").hide();
 
     console.log("User is logged out of My Craving!");
   }
