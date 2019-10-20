@@ -11,7 +11,6 @@ firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var database = firebase.firestore();
 
-
 $(document).ready(function() {
   $("#foodHelp").hide();
 
@@ -64,23 +63,44 @@ $("#signUpClick").on("click", function(event) {
     .trim();
   console.log(email, password);
 
-  // sign user up 
+  // sign user up
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    console.log(cred)
-    var modal = $('#modal-signup');
-    M.Modal.getInstance(modal).close()
-    signupForm.reset()
-  })
+    console.log(cred);
+    var modal = $("#modal-signup");
+    M.Modal.getInstance(modal).close();
+    signupForm.trigger('reset');
+  });
 });
 
-// logging out 
-var logout = $('#logout');
-$('#logout').on('click', function(event){
-event.preventDefault();
-auth.signOut().then(() => {
-  console.log('User signed out')
-})
-})
+// logging out
+var logout = $("#logout");
+$("#logout").on("click", function(event) {
+  event.preventDefault();
+  auth.signOut().then(() => {
+    console.log("User signed out");
+  });
+});
+
+// log back in
+var loginForm = $("#login-form");
+$("#login-form").on("click", function(event) {
+  event.preventDefault();
+  var email = $("#login-email")
+    .val()
+    .trim();
+  var password = $("#login-password")
+    .val()
+    .trim();
+
+  auth.signInWithEmailAndPassword(email, password).then(cred => {
+    console.log(cred.user)
+    // close login and reset 
+    var modal = $("#modal-login");
+    M.Modal.getInstance(modal).close();
+    loginForm.trigger('reset');
+  });
+
+});
 
 // Show the initial buttons based on given array
 function renderInitialButtons() {

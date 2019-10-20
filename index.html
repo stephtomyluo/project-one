@@ -83,8 +83,22 @@
     </nav>
     <!-- Mobile nav  -->
     <ul class="sidenav" id="mobile-demo">
-      <li><a href="#">Sign In</a></li>
-      <li><a href="#">My Account</a></li>
+      <!-- Account  -->
+      <li class="logged-in">
+        <a href="#" class="modal-trigger" data-target="modal-account"
+          >Account</a
+        >
+      </li>
+      <!-- Log out  -->
+      <li class="logged-in"><a href="#" id="logout">Logout</a></li>
+      <!-- Login  -->
+      <li class="logged-out">
+        <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
+      </li>
+      <!-- Sign up  -->
+      <li class="logged-out">
+        <a href="#" class="modal-trigger" data-target="modal-signup">Sign up</a>
+      </li>
     </ul>
     <!-- Input form  -->
     <form>
@@ -127,7 +141,7 @@
               <input type="password" id="signup-password" required />
               <label for="signup-password">Choose password</label>
             </div>
-            <button class="btn" id='signUpClick'>Sign up</button>
+            <button class="btn" id="signUpClick">Sign up</button>
           </form>
         </div>
       </div>
