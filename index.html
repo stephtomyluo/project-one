@@ -9,12 +9,10 @@
     <!-- Fonts  -->
     <style>
       @import url("https://fonts.googleapis.com/css?family=Allerta+Stencil|Baloo|Modak&display=swap");
-
       .element {
         font-family: "Allerta Stencil", "Modak", "Baloo";
         font-size: 3em;
       }
-
       
     </style>
 <!-- Typed.js CDN  -->
@@ -46,9 +44,21 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"
           ><i class="material-icons">menu</i></a
         >
+        <!-- Login auth html  -->
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Sign In</a></li>
-          <li><a href="#">My Account</a></li>
+          <!-- Account  -->
+          <li class='logged-in'><a href="#" class='modal-trigger' data-target='modal-account'>Account</a></li>
+          <!-- Log out  -->
+          <li class='logged-in'><a href="#" id='logout'>Logout</a></li>
+          <!-- Login  -->
+          <li class='logged-out'><a href="#" class='modal-trigger' data-target='modal-login'>Login</a></li>
+          <!-- Sign up  -->
+          <li class='logged-out'><a href="#" class='modal-trigger' data-target='modal-signup'>Sign up</a></li>
+          
+          
+          <!-- Somehow only show favorites for signed in  -->
+          
+
         </ul>
       </div>
 
