@@ -1,8 +1,39 @@
+// Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyBkN7hBxeg51ajiY_tcjIEUt7iikbP3GJw",
+  authDomain: "train-time-c54a0.firebaseapp.com",
+  databaseURL: "https://train-time-c54a0.firebaseio.com",
+  projectId: "train-time-c54a0"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// make authorization and firebase references
+var auth = firebase.auth();
+var database = firebase.firestore();
+
 $(document).ready(function() {
   $("#foodHelp").hide();
 
   M.AutoInit();
   $("#modal1").modal("open");
+
+  // Type out our nav header
+  var typed = new Typed(".element", {
+    strings: ["I want to fulfill", "My Craving"],
+    stringsElement: null,
+    // typing speed
+    typeSpeed: 75,
+    // backspace speed
+    backSpeed: 50,
+    backDelay: 800,
+    // how long to wait before start typing
+    startDelay: 500,
+    loop: true,
+    showCursor: false,
+    cursorChar: "|",
+    attr: null
+  });
+
   // IP-API
   var queryURL = "http://ip-api.com/json/?zip";
 
@@ -12,13 +43,96 @@ $(document).ready(function() {
   }).then(function(response) {
     // Dynamically change yelp location
     currentLocation = response.zip;
-    console.log(currentLocation)
+    console.log(currentLocation);
   });
 });
 
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 // If no location is found, kc is automatic
 var currentLocation = "kansas city";
+
+// const setUp = (data) => {
+//   if (user) {
+//     loggedIn.forEach(link => link.style.display ='block')
+//     loggedOut.forEach(link => link.style.display ='none')
+//   }else {
+//     loggedIn.forEach(link => link.style.display ='none')
+//     loggedOut.forEach(link => link.style.display ='block')
+//   }
+// }
+
+// listen for auth state change 
+auth.onAuthStateChanged(user => {
+  if (user){
+    console.log('user logged in as: ' + user)
+    // setUp(user)
+  } else {
+    // setUp(user)
+    console.log('user logged out')
+  }
+
+// Show links conditionally 
+  var loggedOut = $('.logged-out');
+  var loggedIn = $('.logged-in');
+
+
+
+  // if (user) {
+  //   $('#favoritesDiv')
+  //   // show 
+  // } else {
+  //   $('#favoritesDiv')
+  //   // hide 
+  // }
+})
+
+var signupForm = $("#signup-form");
+$("#signUpClick").on("click", function(event) {
+  event.preventDefault();
+  // get user info
+  var email = $("#signup-email")
+    .val()
+    .trim();
+  var password = $("#signup-password")
+    .val()
+    .trim();
+  console.log(email, password);
+
+  // sign user up
+  auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    console.log(cred);
+    var modal = $("#modal-signup");
+    M.Modal.getInstance(modal).close();
+    signupForm.trigger('reset');
+  });
+});
+
+// logging out
+var logout = $("#logout");
+$("#logout").on("click", function(event) {
+  event.preventDefault();
+  auth.signOut()
+});
+
+// log back in
+var loginForm = $("#login-form");
+$("#login-form").on("click", function(event) {
+  event.preventDefault();
+  var email = $("#login-email")
+    .val()
+    .trim();
+  var password = $("#login-password")
+    .val()
+    .trim();
+
+  auth.signInWithEmailAndPassword(email, password).then(cred => {
+    // close login and reset 
+    var modal = $("#modal-login");
+    M.Modal.getInstance(modal).close();
+    loginForm.trigger('reset');
+  });
+
+});
 
 // Show the initial buttons based on given array
 function renderInitialButtons() {
@@ -94,7 +208,6 @@ $(document).on("click", ".foodCategory", function() {
       // var website = ('website: ' +results[i].url);
       var image = results[i].image_url;
       var yelpResults = `<div data-name="${restaurantName}" class='restaurantCard col s12 m6 l4 card medium'>
-
                             <p id='${restaurantName}'>${restaurantName}</p>
                             <p>${displayLocation}</p>
                             <p>${phoneNumber}</p>
@@ -102,20 +215,11 @@ $(document).on("click", ".foodCategory", function() {
                             <p>${actualRating}</p>
                             <img src='${image}' class='yelpImage'/>
                         </div>`;
-      // yelpResults.data('coords', {lat: results[i].coordinates.latitude, lng: 1})
-
       // <p>${website}</p>
       // <p>${actualPrice}</p>
 
       restaurantDiv.append(ratingText);
       $(".foodView").append(yelpResults);
-      var informationObject = {
-        restaurantName: results[i].name,
-        longitude: results[i].coordinates.longitude,
-        latitude: results[i].coordinates.latitude
-      };
-      restaurantsArray.push(informationObject);
-      // console.log(restaurantsArray);
     }
   });
   $(".foodView").empty();
@@ -124,12 +228,11 @@ $(document).on("click", ".foodCategory", function() {
 var restaurantsArray = [];
 var favoritesArray = [];
 
+// Dynamically change the map
 $(document).on("click", ".restaurantCard", function(event) {
   var index = $(this).attr("data-name");
-  
-  initMap(index)
+  initMap(index);
 });
-
 
 // MAP
 var map;
@@ -147,11 +250,9 @@ function initMap(name) {
   });
 
   var request = {
-    // need to dynamically change this query 
     query: name,
     fields: ["name", "geometry"]
   };
-console.log(request)
   service = new google.maps.places.PlacesService(map);
 
   service.findPlaceFromQuery(request, function(results, status) {
