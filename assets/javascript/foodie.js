@@ -1,3 +1,17 @@
+// Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyBkN7hBxeg51ajiY_tcjIEUt7iikbP3GJw",
+  authDomain: "train-time-c54a0.firebaseapp.com",
+  databaseURL: "https://train-time-c54a0.firebaseio.com",
+  projectId: "train-time-c54a0"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// make authorization and firebase references
+var auth = firebase.auth();
+var database = firebase.firestore();
+
+
 $(document).ready(function() {
   $("#foodHelp").hide();
 
@@ -53,6 +67,9 @@ $("#signUpClick").on("click", function(event) {
   // sign user up 
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
     console.log(cred)
+    var modal = $('#modal-signup');
+    M.Modal.getInstance(modal).close()
+    signupForm.reset()
   })
 });
 
