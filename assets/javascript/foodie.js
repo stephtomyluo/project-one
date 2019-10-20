@@ -3,25 +3,22 @@ $(document).ready(function() {
 
   M.AutoInit();
   $("#modal1").modal("open");
-  
-// Type out our nav header 
-  var typed = new Typed('.element', {
-    
-    strings: [
-      'I want to fulfill', 'My Craving'
-    ],
+
+  // Type out our nav header
+  var typed = new Typed(".element", {
+    strings: ["I want to fulfill", "My Craving"],
     stringsElement: null,
-  // typing speed 
+    // typing speed
     typeSpeed: 75,
-    // backspace speed 
+    // backspace speed
     backSpeed: 50,
     backDelay: 800,
-    // how long to wait before start typing 
+    // how long to wait before start typing
     startDelay: 500,
     loop: true,
     showCursor: false,
     cursorChar: "|",
-    attr: null,
+    attr: null
   });
 
   // IP-API
@@ -41,17 +38,23 @@ var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 // If no location is found, kc is automatic
 var currentLocation = "kansas city";
 
-const signupForm = $('#signup-form');
-$('#signUpClick').on('click', function(event){
+var signupForm = $("#signup-form");
+$("#signUpClick").on("click", function(event) {
   event.preventDefault();
-// get user info 
-const email = $('#signup-email').val()
-const password = $('#signup-password').val()
+  // get user info
+  var email = $("#signup-email")
+    .val()
+    .trim();
+  var password = $("#signup-password")
+    .val()
+    .trim();
+  console.log(email, password);
 
-console.log(email, password)
-
-})
-
+  // sign user up 
+  auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    console.log(cred)
+  })
+});
 
 // Show the initial buttons based on given array
 function renderInitialButtons() {
