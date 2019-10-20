@@ -41,6 +41,18 @@ var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 // If no location is found, kc is automatic
 var currentLocation = "kansas city";
 
+const signupForm = $('#signup-form');
+$('#signUpClick').on('click', function(event){
+  event.preventDefault();
+// get user info 
+const email = $('#signup-email').val()
+const password = $('#signup-password').val()
+
+console.log(email, password)
+
+})
+
+
 // Show the initial buttons based on given array
 function renderInitialButtons() {
   // So that the buttons are not added on repeat
