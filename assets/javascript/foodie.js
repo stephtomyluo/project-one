@@ -51,13 +51,31 @@ var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 // If no location is found, kc is automatic
 var currentLocation = "kansas city";
 
+// const setUp = (data) => {
+//   if (user) {
+//     loggedIn.forEach(link => link.style.display ='block')
+//     loggedOut.forEach(link => link.style.display ='none')
+//   }else {
+//     loggedIn.forEach(link => link.style.display ='none')
+//     loggedOut.forEach(link => link.style.display ='block')
+//   }
+// }
+
 // listen for auth state change 
 auth.onAuthStateChanged(user => {
   if (user){
     console.log('user logged in as: ' + user)
+    // setUp(user)
   } else {
+    // setUp(user)
     console.log('user logged out')
   }
+
+// Show links conditionally 
+  var loggedOut = $('.logged-out');
+  var loggedIn = $('.logged-in');
+
+
 
   // if (user) {
   //   $('#favoritesDiv')
