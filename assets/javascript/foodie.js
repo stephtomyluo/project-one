@@ -73,6 +73,15 @@ $("#signUpClick").on("click", function(event) {
   })
 });
 
+// logging out 
+var logout = $('#logout');
+$('#logout').on('click', function(event){
+event.preventDefault();
+auth.signOut().then(() => {
+  console.log('User signed out')
+})
+})
+
 // Show the initial buttons based on given array
 function renderInitialButtons() {
   // So that the buttons are not added on repeat
