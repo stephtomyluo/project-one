@@ -36,7 +36,6 @@
   </head>
 
   <body>
-
     <!-- Materialize navbar  -->
     <nav class="nav-extended">
       <div class="nav-wrapper">
@@ -46,22 +45,27 @@
         >
         <!-- Login auth html  -->
         <ul class="right hide-on-med-and-down">
+          
           <!-- Account  -->
-          <li id='account'class="logged-in " data-login=false>
-            <a href="#" class="modal-trigger" data-target="modal-account" 
+          <li id="account" class="logged-in">
+            <a href="#" class="modal-trigger" data-target="modal-account"
               >Account</a
             >
           </li>
           <!-- Log out  -->
-          <li id='logoutAcct'class="logged-in " ><a href="#" id="logout">Logout</a></li>
+          <li id="logoutAcct" class="logged-in ">
+            <a href="#" id="logout">Logout</a>
+          </li>
+
           <!-- Login  -->
-          <li id='logIn'class="logged-out" >
+          <li id="logIn" class="logged-out">
             <a href="#" class="modal-trigger" data-target="modal-login"
               >Login</a
             >
           </li>
+
           <!-- Sign up  -->
-          <li id='signUp'class="logged-out" >
+          <li id="signUp" class="logged-out">
             <a href="#" class="modal-trigger" data-target="modal-signup"
               >Sign up</a
             >
@@ -70,19 +74,24 @@
           <!-- Somehow only show favorites for signed in  -->
         </ul>
       </div>
-
+      <!-- Tabs to toggle between  -->
       <div class="nav-content">
         <ul class="tabs tabs-transparent">
+          <!-- Main tab with buttons and yelp results  -->
           <li class="tab">
             <a href="#restaurantsNear" class="active"
               >Find Restaurants near me</a
             >
           </li>
+          <!-- Map tab  -->
           <li class="tab"><a href="#googleMapDiv">Google Maps</a></li>
+          <!-- Favorites tab  -->
           <li class="tab"><a href="#favoritesDiv">Favorites</a></li>
         </ul>
       </div>
     </nav>
+    <!-- End of nav  -->
+
     <!-- Mobile nav  -->
     <ul class="sidenav" id="mobile-demo">
       <!-- Account  -->
@@ -91,17 +100,21 @@
           >Account</a
         >
       </li>
+
       <!-- Log out  -->
       <li class="logged-in"><a href="#" id="logout">Logout</a></li>
+
       <!-- Login  -->
       <li class="logged-out">
         <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
       </li>
+
       <!-- Sign up  -->
       <li class="logged-out">
         <a href="#" class="modal-trigger" data-target="modal-signup">Sign up</a>
       </li>
     </ul>
+
     <!-- Input form  -->
     <form>
       <div class="input-field">
@@ -176,7 +189,7 @@
         </div>
       </div>
 
-      <!-- Modal Structure -->
+      <!-- Modal when first visiting -->
       <div id="modal1" class="modal">
         <div class="modal-content">
           <h4>Welcome to My Craving</h4>
@@ -192,11 +205,13 @@
         </div>
       </div>
 
+      <!-- Allows for typed heading  -->
       <div id="typed-strings"></div>
-
       <span id="typed"></span>
+
       <!-- Tabs area  -->
 
+      <!-- Main div  -->
       <div id="restaurantsNear" class="col s12">
         <!-- Where food category buttons will appear  -->
         <div class="row">
@@ -208,6 +223,7 @@
           <div class="foodView col l12"></div>
         </div>
       </div>
+
       <!-- Map Div  -->
 
       <div id="googleMapDiv" class="col s12">
@@ -215,7 +231,9 @@
       </div>
 
       <!-- Favorites  -->
-      <div id="favoritesDiv" class="col s12">Test 4</div>
+      <div id="favoritesDiv" class="col s12">Favorites Div</div>
+
+      <!-- Container tag  -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

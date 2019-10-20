@@ -1,35 +1,45 @@
-var user = ''
+// Global user variable for login auth
+var user = "";
 
-// Firebase configuration
+var restaurantsArray = [];
+var favoritesArray = [];
+
+var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
+
+// If no location is found, KC is automatic
+var currentLocation = "";
+
+// Firebase config
 var firebaseConfig = {
   apiKey: "AIzaSyBkN7hBxeg51ajiY_tcjIEUt7iikbP3GJw",
   authDomain: "train-time-c54a0.firebaseapp.com",
   databaseURL: "https://train-time-c54a0.firebaseio.com",
   projectId: "train-time-c54a0"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// make authorization and firebase references
+// Make authorization and firebase references
 var auth = firebase.auth();
 // var database = firebase.firestore();
 
 $(document).ready(function() {
-  $("#foodHelp").hide();
-
   M.AutoInit();
   $("#modal1").modal("open");
+
+  $("#foodHelp").hide();
 
   // Type out our nav header
   var typed = new Typed(".element", {
     strings: ["I want to fulfill", "My Craving"],
     stringsElement: null,
-    // typing speed
+    // Typing speed
     typeSpeed: 75,
-    // backspace speed
+    // Backspace speed
     backSpeed: 50,
     backDelay: 800,
-    // how long to wait before start typing
+    // How long to wait before typing again
     startDelay: 500,
     loop: true,
     showCursor: false,
@@ -50,88 +60,54 @@ $(document).ready(function() {
   });
 });
 
-var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
-// If no location is found, kc is automatic
-var currentLocation = "kansas city";
-
-
-function hideBasedOnStatus(){
-  console.log('attempt change status')
-  var account = $('#account').attr('data-login');
-  var logoutAcct = $('#logoutAcct').attr('data-login');
-  var logIn = $('#logIn').attr('data-login');
-  var signUp = $('#signUp').attr('data-login');
-// console.log(account, logoutAcct, logIn, signUp)
-
-
-if (account == false){
-  $('#account').removeClass('hidden')
-  $('#logoutAcct').removeClass('hidden')
-  $('#logIn').addClass('hidden')
-  $('#signUp').addClass('hidden')
-
-  $('#account').attr('data-login', true)
-console.log($('#account').attr('data-login'))
-} else if (account == true) {
-  $('#account').addClass('hidden')
-  $('#logoutAcct').addClass('hidden')
-  $('#logIn').removeClass('hidden')
-  $('#signUp').removeClass('hidden')
-
-  $('#account').attr('data-login', false)
-  console.log($('#account').attr('data-login'))
-}
-}
-
-// listen for auth state change 
+// listen for auth state change, lets you know whether logged out or in
 auth.onAuthStateChanged(user => {
-  if (user){
-    console.log('user logged in as: ' + user.email)
-    hideBasedOnStatus()
-  } else {
-    hideBasedOnStatus()
-    console.log('user logged out')
+  if (user) {
+    console.log("User logged in as: " + user.email);
+    $("#logIn").hide()
+    $("#signUp").hide()
+    $("#account").show()
+    $("#logoutAcct").show()
+// Conditionally show links 
+  } else if (!user) {
+    $("#account").hide()
+    $("#logoutAcct").hide()
+    $("#logIn").show()
+    $("#signUp").show()
+    
+    console.log("User is logged out of My Craving!");
   }
-
-// Show links conditionally 
-  var loggedOut = $('.logged-out');
-  var loggedIn = $('.logged-in');
-
-})
+});
 
 var signupForm = $("#signup-form");
 $("#signUpClick").on("click", function(event) {
   event.preventDefault();
-  // get user info
+  // Get user info
   var email = $("#signup-email")
     .val()
     .trim();
   var password = $("#signup-password")
     .val()
     .trim();
-  console.log(email, password);
+  console.log("Signup form: " + email, password);
 
-  // sign user up
+  // Sign user up
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
     console.log(cred);
     var modal = $("#modal-signup");
     M.Modal.getInstance(modal).close();
-    signupForm.trigger('reset');
-    user = email
-    console.log(user)
+    signupForm.trigger("reset");
   });
 });
 
-// logging out
+// Logging out
 var logout = $("#logout");
 $("#logout").on("click", function(event) {
   event.preventDefault();
-  auth.signOut()
-  user = ''
-  console.log(user)
+  auth.signOut();
 });
 
-// log back in
+// Log back in
 var loginForm = $("#login-form");
 $("#login-form").on("click", function(event) {
   event.preventDefault();
@@ -142,14 +118,11 @@ $("#login-form").on("click", function(event) {
     .val()
     .trim();
   auth.signInWithEmailAndPassword(email, password).then(cred => {
-    // close login and reset 
+    // Close login and reset
     var modal = $("#modal-login");
     M.Modal.getInstance(modal).close();
-    loginForm.trigger('reset');
-    user = email
-    console.log(user)
+    loginForm.trigger("reset");
   });
-
 });
 
 // Show the initial buttons based on given array
@@ -243,10 +216,7 @@ $(document).on("click", ".foodCategory", function() {
   $(".foodView").empty();
 });
 
-var restaurantsArray = [];
-var favoritesArray = [];
-
-// Dynamically change the map
+// Dynamically change the map, whatever restaurant card is clicked is the one that the map will take you to
 $(document).on("click", ".restaurantCard", function(event) {
   var index = $(this).attr("data-name");
   initMap(index);
