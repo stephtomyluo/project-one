@@ -3,6 +3,27 @@ $(document).ready(function() {
 
   M.AutoInit();
   $("#modal1").modal("open");
+  
+// Type out our nav header 
+  var typed = new Typed('.element', {
+    
+    strings: [
+      'I want to fulfill', 'My Craving'
+    ],
+    stringsElement: null,
+  // typing speed 
+    typeSpeed: 75,
+    // backspace speed 
+    backSpeed: 50,
+    backDelay: 800,
+    // how long to wait before start typing 
+    startDelay: 500,
+    loop: true,
+    showCursor: false,
+    cursorChar: "|",
+    attr: null,
+  });
+
   // IP-API
   var queryURL = "http://ip-api.com/json/?zip";
 
@@ -12,7 +33,7 @@ $(document).ready(function() {
   }).then(function(response) {
     // Dynamically change yelp location
     currentLocation = response.zip;
-    console.log(currentLocation)
+    console.log(currentLocation);
   });
 });
 
@@ -94,7 +115,6 @@ $(document).on("click", ".foodCategory", function() {
       // var website = ('website: ' +results[i].url);
       var image = results[i].image_url;
       var yelpResults = `<div data-name="${restaurantName}" class='restaurantCard col s12 m6 l4 card medium'>
-
                             <p id='${restaurantName}'>${restaurantName}</p>
                             <p>${displayLocation}</p>
                             <p>${phoneNumber}</p>
@@ -102,20 +122,11 @@ $(document).on("click", ".foodCategory", function() {
                             <p>${actualRating}</p>
                             <img src='${image}' class='yelpImage'/>
                         </div>`;
-      // yelpResults.data('coords', {lat: results[i].coordinates.latitude, lng: 1})
-
       // <p>${website}</p>
       // <p>${actualPrice}</p>
 
       restaurantDiv.append(ratingText);
       $(".foodView").append(yelpResults);
-      var informationObject = {
-        restaurantName: results[i].name,
-        longitude: results[i].coordinates.longitude,
-        latitude: results[i].coordinates.latitude
-      };
-      restaurantsArray.push(informationObject);
-      // console.log(restaurantsArray);
     }
   });
   $(".foodView").empty();
@@ -124,12 +135,11 @@ $(document).on("click", ".foodCategory", function() {
 var restaurantsArray = [];
 var favoritesArray = [];
 
+// Dynamically change the map
 $(document).on("click", ".restaurantCard", function(event) {
   var index = $(this).attr("data-name");
-  
-  initMap(index)
+  initMap(index);
 });
-
 
 // MAP
 var map;
@@ -147,11 +157,9 @@ function initMap(name) {
   });
 
   var request = {
-    // need to dynamically change this query 
     query: name,
     fields: ["name", "geometry"]
   };
-console.log(request)
   service = new google.maps.places.PlacesService(map);
 
   service.findPlaceFromQuery(request, function(results, status) {
