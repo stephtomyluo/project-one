@@ -51,6 +51,23 @@ var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 // If no location is found, kc is automatic
 var currentLocation = "kansas city";
 
+// listen for auth state change 
+auth.onAuthStateChanged(user => {
+  if (user){
+    console.log('user logged in as: ' + user)
+  } else {
+    console.log('user logged out')
+  }
+
+  // if (user) {
+  //   $('#favoritesDiv')
+  //   // show 
+  // } else {
+  //   $('#favoritesDiv')
+  //   // hide 
+  // }
+})
+
 var signupForm = $("#signup-form");
 $("#signUpClick").on("click", function(event) {
   event.preventDefault();
@@ -76,9 +93,7 @@ $("#signUpClick").on("click", function(event) {
 var logout = $("#logout");
 $("#logout").on("click", function(event) {
   event.preventDefault();
-  auth.signOut().then(() => {
-    console.log("User signed out");
-  });
+  auth.signOut()
 });
 
 // log back in
@@ -93,7 +108,6 @@ $("#login-form").on("click", function(event) {
     .trim();
 
   auth.signInWithEmailAndPassword(email, password).then(cred => {
-    console.log(cred.user)
     // close login and reset 
     var modal = $("#modal-login");
     M.Modal.getInstance(modal).close();
