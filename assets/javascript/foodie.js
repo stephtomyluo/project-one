@@ -64,20 +64,27 @@ $(document).ready(function() {
 auth.onAuthStateChanged(user => {
   if (user) {
     console.log("User logged in as: " + user.email);
-    $("#logIn").hide()
-    $("#signUp").hide()
-    $("#account").show()
-    $("#logoutAcct").show()
-    $('#favTab').show()
+    $("#logIn").hide();
+    $("#signUp").hide();
+    $("#account").show();
+    $("#logoutAcct").show();
+    $("#favTab").show();
 
-// Conditionally show links 
+    var accountDetails = $(".accountDetails");
+    accountDetails = `<div>
+    <p>You are signed in as ${user.email}</p>
+</div>`;
+$("#modal-account").append(accountDetails);
+
+
+    // Conditionally show links
   } else if (!user) {
-    $("#account").hide()
-    $("#logoutAcct").hide()
-    $("#logIn").show()
-    $("#signUp").show()
-    $('#favTab').hide()
-    
+    $("#account").hide();
+    $("#logoutAcct").hide();
+    $("#logIn").show();
+    $("#signUp").show();
+    $("#favTab").hide();
+
     console.log("User is logged out of My Craving!");
   }
 });
