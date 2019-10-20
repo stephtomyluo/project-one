@@ -68,12 +68,15 @@ auth.onAuthStateChanged(user => {
     $("#signUp").hide()
     $("#account").show()
     $("#logoutAcct").show()
+    $('#favTab').show()
+
 // Conditionally show links 
   } else if (!user) {
     $("#account").hide()
     $("#logoutAcct").hide()
     $("#logIn").show()
     $("#signUp").show()
+    $('#favTab').hide()
     
     console.log("User is logged out of My Craving!");
   }

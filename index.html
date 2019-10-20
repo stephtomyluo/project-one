@@ -45,7 +45,7 @@
         >
         <!-- Login auth html  -->
         <ul class="right hide-on-med-and-down">
-          
+
           <!-- Account  -->
           <li id="account" class="logged-in">
             <a href="#" class="modal-trigger" data-target="modal-account"
@@ -86,7 +86,7 @@
           <!-- Map tab  -->
           <li class="tab"><a href="#googleMapDiv">Google Maps</a></li>
           <!-- Favorites tab  -->
-          <li class="tab"><a href="#favoritesDiv">Favorites</a></li>
+          <li class="tab" id='favTab'><a href="#favoritesDiv">Favorites</a></li>
         </ul>
       </div>
     </nav>
@@ -95,22 +95,22 @@
     <!-- Mobile nav  -->
     <ul class="sidenav" id="mobile-demo">
       <!-- Account  -->
-      <li class="logged-in">
+      <li id="account" class="logged-in">
         <a href="#" class="modal-trigger" data-target="modal-account"
           >Account</a
         >
       </li>
 
       <!-- Log out  -->
-      <li class="logged-in"><a href="#" id="logout">Logout</a></li>
+      <li id="logoutAcct" class="logged-in"><a href="#" id="logout">Logout</a></li>
 
       <!-- Login  -->
-      <li class="logged-out">
+      <li id="logIn" class="logged-out">
         <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
       </li>
 
       <!-- Sign up  -->
-      <li class="logged-out">
+      <li id="signUp" class="logged-out">
         <a href="#" class="modal-trigger" data-target="modal-signup">Sign up</a>
       </li>
     </ul>
