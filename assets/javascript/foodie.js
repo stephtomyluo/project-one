@@ -1,13 +1,14 @@
 // Global user variable for login auth
 var user = "";
 
-var restaurantsArray = [];
-var favoritesArray = [];
+// var restaurantsArray = [];
+// var favoritesArray = [];
+var latitude;
+var longitude;
 
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 
-// If no location is found, KC is automatic
-var currentLocation = "";
+var currentLocation = '';
 
 // Firebase config
 var firebaseConfig = {
@@ -47,15 +48,20 @@ $(document).ready(function() {
   });
 
   // IP-API
-  var queryURL = "http://ip-api.com/json/?zip";
+  var queryURL = "http://ip-api.com/json/?city";
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
     // Dynamically change yelp location
-    currentLocation = response.zip;
+    currentLocation = response.city;
+    latitude = response.lat;
+    longitude = response.lon;
+    console.log(response)
     console.log(currentLocation);
+    console.log(latitude)
+    console.log(longitude)
   });
 });
 
@@ -177,7 +183,6 @@ $(document).on("click", ".foodCategory", function() {
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search";
   var token =
     "TYZngowcxwPSs9gKgh4QvoFtqRjOaf2ljMByH3KisnE-k-zcMifnXcbASV_SJZBeK6vw7aon47lCat8kreKb64XoDv6wxsN0Zz-VvL6olAN9L1dzpvfRP8GUpWWmXXYx";
-
   $.ajax({
     url: queryURL,
     method: "GET",
@@ -190,7 +195,9 @@ $(document).on("click", ".foodCategory", function() {
       location: currentLocation,
       categories: "food, ALL"
     }
+    
   }).then(function(response) {
+    console.log(currentLocation)
     console.log(response.businesses);
     var results = response.businesses;
 
