@@ -1,8 +1,6 @@
 // Global user variable for login auth
 var user = "";
 
-// var restaurantsArray = [];
-// var favoritesArray = [];
 var latitude;
 var longitude;
 
@@ -209,8 +207,6 @@ $(document).on("click", ".foodCategory", function() {
       var actualRating = "Rating: " + results[i].rating;
       var totalReviews = results[i].review_count;
       var displayLocation = results[i].location.display_address;
-      // var actualPrice = results[i].price;
-      // var website = ('website: ' +results[i].url);
       var image = results[i].image_url;
       var yelpResults = `<div data-name="${restaurantName}" class='restaurantCard col s12 m6 l4 card medium'>
                             <p id='${restaurantName}'>${restaurantName}</p>
@@ -220,8 +216,6 @@ $(document).on("click", ".foodCategory", function() {
                             <p>${actualRating}</p>
                             <img src='${image}' class='yelpImage'/>
                         </div>`;
-      // <p>${website}</p>
-      // <p>${actualPrice}</p>
 
       restaurantDiv.append(ratingText);
       $(".foodView").append(yelpResults);
