@@ -43,7 +43,7 @@ $(document).ready(function() {
   });
 
   // IP-API
-  var queryURL = "http://ip-api.com/json/?city";
+  var queryURL = "https://ip-api.com/json/?city";
 
   $.ajax({
     url: queryURL,
