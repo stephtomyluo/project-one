@@ -1,12 +1,9 @@
 // Global user variable for login auth
 var user = "";
 
-var latitude;
-var longitude;
-
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 
-var currentLocation = '';
+var currentLocation = 'kansas city';
 
 // Firebase config
 var firebaseConfig = {
@@ -54,12 +51,9 @@ $(document).ready(function() {
   }).then(function(response) {
     // Dynamically change yelp location
     currentLocation = response.city;
-    latitude = response.lat;
-    longitude = response.lon;
     console.log(response)
     console.log(currentLocation);
-    console.log(latitude)
-    console.log(longitude)
+  
   });
 });
 
