@@ -291,7 +291,7 @@ function createMarker(place) {
                             <p>${phoneNumber}</p>
                             <p>Reviews:  ${totalReviews}</p>
                             <p>${actualRating}</p>
-                            <p><button <button class="restaurantCard__add-favorite btn">Save to favorites 🌟</button></p>
+                            <p><button class="restaurantCard__show-map btn">Show map</button> <button class="restaurantCard__add-favorite btn">Save to favorites 🌟</button></p>
                             <img src='${image}' class='yelpImage'/>
                             
                         </div>`;
