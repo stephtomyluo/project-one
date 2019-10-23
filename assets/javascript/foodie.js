@@ -1,5 +1,6 @@
 // Global user variable for login auth
 var user = "";
+var randomSelection=[];
 
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 
@@ -192,6 +193,7 @@ $(document).on("click", ".foodCategory", function() {
     console.log(currentLocation)
     console.log(response.businesses);
     var results = response.businesses;
+   randomSelection =results;
 
     for (var i = 0; i < results.length; i++) {
       var restaurantDiv = $("<div>");
@@ -268,4 +270,34 @@ function createMarker(place) {
     infowindow.setContent(place.name);
     infowindow.open(map, this);
   });
+
+
 }
+  //randomomize button 
+
+  $(document).on("click", "#randomize", function(){
+    var randomRestaurant = randomSelection[Math.floor(Math.random() * randomSelection.length)];
+    var restaurantDiv = $("<div>");
+      var restaurantName = randomRestaurant.name;
+      var phoneNumber = "Phone Number: " + randomRestaurant.display_phone;
+      var ratingText = $("<p>").text(`Rating: ${actualRating}`);
+      var actualRating = "Rating: " + randomRestaurant.rating;
+      var totalReviews = randomRestaurant.review_count;
+      var displayLocation = randomRestaurant.location.display_address;
+      var image = randomRestaurant.image_url;
+      var yelpResults = `<div data-name="${restaurantName}" class='restaurantCard col s12 m6 l4 card medium'>
+                            <p id='${restaurantName}'>${restaurantName}</p>
+                            <p>${displayLocation}</p>
+                            <p>${phoneNumber}</p>
+                            <p>Reviews:  ${totalReviews}</p>
+                            <p>${actualRating}</p>
+                            <p><button <button class="restaurantCard__add-favorite btn">Save to favorites 🌟</button></p>
+                            <img src='${image}' class='yelpImage'/>
+                            
+                        </div>`;
+
+      restaurantDiv.append(ratingText);
+      $(".foodView").html(yelpResults);
+    
+  
+  });
