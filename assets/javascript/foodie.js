@@ -208,7 +208,9 @@ $(document).on("click", ".foodCategory", function() {
                             <p>${phoneNumber}</p>
                             <p>Reviews:  ${totalReviews}</p>
                             <p>${actualRating}</p>
+                            <p><button <button class="restaurantCard__add-favorite btn">Save to favorites 🌟</button></p>
                             <img src='${image}' class='yelpImage'/>
+                            
                         </div>`;
 
       restaurantDiv.append(ratingText);
