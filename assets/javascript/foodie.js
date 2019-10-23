@@ -106,8 +106,8 @@ $("#signUpClick").on("click", function(event) {
 });
 
 // Logging out
-var logout = $("#logout");
-$("#logout").on("click", function(event) {
+var logout = $(".logoutBoth");
+$(".logoutBoth").on("click", function(event) {
   event.preventDefault();
   auth.signOut();
 });
