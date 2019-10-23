@@ -3,6 +3,8 @@ var user = "";
 
 var restaurantsArray = [];
 var favoritesArray = [];
+var latitude;
+var longitude;
 
 var categoriesArray = ["American", "Mexican", "Italian", "Vietnamese"];
 
@@ -205,28 +207,34 @@ $(document).on("click", ".foodCategory", function() {
       // var actualPrice = results[i].price;
       // var website = ('website: ' +results[i].url);
       var image = results[i].image_url;
-      var yelpResults = `<div data-name="${restaurantName}" class='restaurantCard col s12 m6 l4 card medium'>
+      var yelpResults = $(`<div data-name="${restaurantName}" class="restaurantCard col s12 m6 l4 card medium">
                             <p id='${restaurantName}'>${restaurantName}</p>
                             <p>${displayLocation}</p>
                             <p>${phoneNumber}</p>
                             <p>Reviews:  ${totalReviews}</p>
                             <p>${actualRating}</p>
-                            <img src='${image}' class='yelpImage'/>
-                        </div>`;
+                            <p><img src='${image}' class='yelpImage'/></p>
+                            <p><button class="restaurantCard__show-map btn">Show map</button> <button class="restaurantCard__add-favorite btn">Save to favorites 🌟</button></p>
+                        </div>`);
       // <p>${website}</p>
       // <p>${actualPrice}</p>
 
       restaurantDiv.append(ratingText);
       $(".foodView").append(yelpResults);
+
+      // Dynamically change the map, whatever restaurant card is clicked is the one that the map will take you to
+      yelpResults.on("click", ".restaurantCard__show-map", function() {
+        var cardName = $(this).attr("data-name");
+        initMap(cardName);
+      });
+      
+      yelpResults.on("click", ".restaurantCard__add-favorite", function() {
+        var cardName = $(this).attr("data-name");
+        addToFavorites(cardName);
+      });
     }
   });
   $(".foodView").empty();
-});
-
-// Dynamically change the map, whatever restaurant card is clicked is the one that the map will take you to
-$(document).on("click", ".restaurantCard", function(event) {
-  var index = $(this).attr("data-name");
-  initMap(index);
 });
 
 // MAP
@@ -271,4 +279,10 @@ function createMarker(place) {
     infowindow.setContent(place.name);
     infowindow.open(map, this);
   });
+
+
+
 }
+
+
+
