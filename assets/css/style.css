@@ -18,3 +18,10 @@
     width: 335px;
   }
 
+  body {
+    background-image: url(../images/background.jfif);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
